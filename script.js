@@ -1,12 +1,14 @@
 
 let container = document.querySelector("#container");
 let divs = document.querySelectorAll("#container div");
+let typeColor;
 
 pushDivs(16);
 
 function makeDiv () {
 
     let div = document.createElement("div");
+    div.style.backgroundColor = "white"
     return div;
 }
 
@@ -18,7 +20,9 @@ function updateContainer (containerSize) {
 }
 
 function updtadeDivs () {
+
     divs = document.querySelectorAll("#container div")
+    divEvent();
 }
 
 function pushDivs (containerSize) {
@@ -41,6 +45,14 @@ function removeDivs (containerSize) {
     for (let i = 0; i < containerSize; i++) 
         container.removeChild(divs[i])
     
+}
+
+function divEvent () {
+
+    divs.forEach(div => div.addEventListener("mouseover", function (e) {
+        paintDiv(e.target, typeColor);
+    }))
+
 }
 
 function paintDiv (div, color) {
@@ -69,7 +81,6 @@ function getRandomColor () {
 function game () {
 
     let buttons = document.querySelectorAll("button");
-    let typeColor;
 
     buttons.forEach(botao => botao.addEventListener("click", function (e) {
 
@@ -96,9 +107,7 @@ function game () {
         }
     }))
 
-    divs.forEach(div => div.addEventListener("mouseover", function (e) {
-        paintDiv(e.target, typeColor);
-    }))
+    divEvent();
     
 }
 
